@@ -1,5 +1,3 @@
-# my-development-workflow
-
 # My Development Workflow (GitFlow Demo Project)
 
 This repository demonstrates the use of the **GitFlow branching model** using Git and GitHub.  
