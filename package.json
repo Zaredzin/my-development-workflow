@@ -1,0 +1,15 @@
+{
+  "name": "my-development-workflow",
+  "version": "1.0.0",
+  "description": "This repository demonstrates the use of the **GitFlow branching model** using Git and GitHub.  \r It was created as part of a practical assignment to connect theoretical knowledge with real-world version control operations.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
