@@ -1,62 +1,157 @@
-# My Development Workflow (GitFlow Demo Project)
+📘 README – Unit Test Workflow Example
+📌 Overview
 
-This repository demonstrates the use of the **GitFlow branching model** using Git and GitHub.  
-It was created as part of a practical assignment to connect theoretical knowledge with real-world version control operations.
+This repository demonstrates a complete Git development workflow using:
 
----
+Feature branches
 
-## Project Overview
+Pull requests
 
-The purpose of this project is to simulate a collaborative development environment where different features are developed in parallel, merged into a `develop` branch, and eventually integrated into the `main` branch.
+Merge approval rules
 
-The project includes two basic feature modules:
-- **auth.js** – Represents a placeholder for user authentication logic.
-- **api.js** – Represents a placeholder for API integration logic.
+Unit testing with Jest
 
----
+A simple Express.js API
 
-## GitFlow Branching Structure
+The project includes:
 
-The following branches were created according to the GitFlow model:
+A basic Login API
 
-| Branch | Description |
-|--------|--------------|
-| `main` | Production-ready branch containing stable code. |
-| `develop` | Integration branch where new features are merged before release. |
-| `feature/user-authentication` | Feature branch for the authentication module. |
-| `feature/api-integration` | Feature branch for the API integration module. |
+Unit tests for API validation
 
----
+Branching strategy: main, develop, feature/*
 
-## Commands Used
+Documentation of the deployment process
 
-Below are the main Git commands used to set up the repository and workflow:
+This repo is designed for learning CI/CD fundamentals, testing, and version control collaboration.
 
-```bash
-# Clone the repository
-git clone https://github.com/<your-username>/my-development-workflow.git
+🏗️ Project Structure
+my-development-workflow/
+├── src/
+│   ├── app.js
+│   └── routes/
+│       └── login.js
+├── tests/
+│   └── login.test.js
+├── DEPLOYMENT_PROCESS.md
+├── index.js
+├── package.json
+└── README.md
+
+🌱 Branching Strategy
+Branch	Purpose
+main	Production-ready, stable code
+develop	All features are merged here before going to main
+feature/api-login	Code for the login endpoint
+feature/tests-login	Unit tests for the login endpoint
+🔧 Technologies Used
+
+Node.js
+
+Express.js
+
+Jest (unit testing)
+
+Supertest (API testing)
+
+Git & GitHub (pull requests, merge rules)
+
+🚀 Getting Started
+1️⃣ Clone the repository
+git clone <your-repo-url>
 cd my-development-workflow
 
-# Create and push the develop branch
-git checkout main
-git branch develop
-git push -u origin develop
+2️⃣ Install dependencies
+npm install
 
-# Create first feature branch
-git checkout -b feature/user-authentication develop
-echo "// Authentication module" > auth.js
-git add auth.js
-git commit -m "feat: Add initial file for authentication module"
+3️⃣ Run the server
+npm start
 
-# Create second feature branch
-git switch develop
-git checkout -b feature/api-integration
-echo "// API integration module" > api.js
-git add api.js
-git commit -m "feat: Add placeholder for API integration"
 
-# Merge and push branches
-git switch develop
-git merge feature/user-authentication
-git push --all
+Server will start at:
+http://localhost:3000
 
+🧪 Running Unit Tests
+
+To run all tests:
+
+npm test
+
+
+Expected output:
+
+PASS tests/login.test.js
+✓ should login successfully
+✓ should fail with invalid password
+✓ should fail if username or password is missing
+
+🔐 Login API Example
+POST /login
+Request body:
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+Success response:
+{
+  "message": "Login successful"
+}
+
+Error examples:
+
+Missing fields → 400
+
+Wrong credentials → 401
+
+🔀 Pull Request Workflow
+
+Create a branch:
+
+git checkout -b feature/your-feature-name
+
+
+Commit your changes.
+
+Push the branch:
+
+git push origin feature/your-feature-name
+
+
+Open a Pull Request in GitHub.
+
+Describe your changes clearly.
+
+Wait for at least 1 approval.
+
+Merge into develop.
+
+When stable, merge develop → main.
+
+🔒 Branch Protection Rules
+
+In GitHub → Settings → Branches → Branch Protection:
+
+Enable for main and develop:
+
+✔ Require pull request before merging
+
+✔ Require at least 1 approval
+
+✔ Prevent pushes directly to protected branches
+
+📄 Additional Documentation
+
+See DEPLOYMENT_PROCESS.md for:
+
+Deployment steps
+
+Troubleshooting
+
+Requirements
+
+Workflow summary
+
+👨‍💻 Author
+
+This repository was created as part of a unit testing and Git workflow assignment.
