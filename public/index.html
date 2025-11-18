@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login Test UI</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 16px; }
+    form { display: grid; gap: 10px; }
+    label { font-weight: bold; }
+    input[type="text"], input[type="password"] { padding: 8px; font-size: 14px; }
+    button { padding: 10px; font-size: 14px; cursor: pointer; }
+    .result { margin-top: 16px; padding: 12px; border-radius: 4px; }
+    .ok { background: #e6ffed; border: 1px solid #2ecc71; }
+    .err { background: #ffecec; border: 1px solid #e74c3c; }
+  </style>
+</head>
+<body>
+  <h1>Login Test UI</h1>
+  <p>Use this small page to POST credentials to <code>/login</code> and see the JSON response.</p>
+
+  <form id="loginForm">
+    <div>
+      <label for="username">Username</label><br />
+      <input id="username" name="username" type="text" value="admin" required />
+    </div>
+    <div>
+      <label for="password">Password</label><br />
+      <input id="password" name="password" type="password" value="1234" required />
+    </div>
+    <div>
+      <button type="submit">Login</button>
+      <button id="clearBtn" type="button">Clear</button>
+    </div>
+  </form>
+
+  <div id="output" class="result" style="display:none"></div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const output = document.getElementById('output');
+    const clearBtn = document.getElementById('clearBtn');
+
+    clearBtn.addEventListener('click', () => {
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      output.style.display = 'none';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        output.style.display = 'block';
+        output.className = 'result ' + (res.ok ? 'ok' : 'err');
+        output.innerText = `Status: ${res.status}\n\n` + JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.style.display = 'block';
+        output.className = 'result err';
+        output.innerText = 'Network error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
