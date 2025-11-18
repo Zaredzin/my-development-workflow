@@ -1,0 +1,16 @@
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnp.*
+.cache/
+
+# Environment Variables
+.env
+.env.*.local
+secrets.yml
+credentials.json
+keyfile.pem
